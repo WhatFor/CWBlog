@@ -1,9 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
 import { contentfulClient } from "../lib/contentful";
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import type { Document } from "@contentful/rich-text-types";
 import type { BlogPost } from "../lib/contentful";
 
 const entries = await contentfulClient.getEntries<BlogPost>({
@@ -21,7 +18,7 @@ const posts = entries.items.map((item) => {
 });
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="WhatFor">
 	<main class="space-y-3 mx-auto max-w-lg">
 		<h1 class="text-4xl">CW Blog</h1>
 		{
