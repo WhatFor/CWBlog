@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^2.0.0",
+    "@astrojs/sitemap": "^1.0.0",
     "@astrojs/tailwind": "^3.0.0",
     "@astrojs/vercel": "^3.0.0",
     "@types/react": "^18.0.21",
