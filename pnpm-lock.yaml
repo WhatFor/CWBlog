@@ -6,11 +6,14 @@ specifiers:
   '@astrojs/tailwind': ^3.0.0
   '@astrojs/vercel': ^3.0.0
   '@contentful/rich-text-html-renderer': ^16.0.2
+  '@contentful/rich-text-plain-text-renderer': ^16.0.2
   '@contentful/rich-text-types': ^16.0.2
+  '@types/lodash': ^4.14.191
   '@types/react': ^18.0.21
   '@types/react-dom': ^18.0.6
   astro: ^2.0.1
   contentful: ^9.2.20
+  lodash: ^4.17.21
   react: ^18.0.0
   react-dom: ^18.0.0
   sass: ^1.57.1
@@ -22,16 +25,19 @@ dependencies:
   '@astrojs/tailwind': 3.0.0_bgk6wvini4j5nfa7w2itosrqne
   '@astrojs/vercel': 3.0.0_astro@2.0.1
   '@contentful/rich-text-html-renderer': 16.0.2
+  '@contentful/rich-text-plain-text-renderer': 16.0.2
   '@contentful/rich-text-types': 16.0.2
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
   astro: 2.0.1_sass@1.57.1
   contentful: 9.2.20
+  lodash: 4.17.21
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   tailwindcss: 3.2.4
 
 devDependencies:
+  '@types/lodash': 4.14.191
   sass: 1.57.1
 
 packages:
@@ -417,6 +423,13 @@ packages:
       escape-html: 1.0.3
     dev: false
 
+  /@contentful/rich-text-plain-text-renderer/16.0.2:
+    resolution: {integrity: sha512-8GDARwU0X8XZU8Vor7N0NRqyHeYp1/RHOhS2qhm0kDJGRaPocs1tL6nzHXjSnmGuTgH0NCk4QreAZltakIgbzQ==}
+    engines: {node: '>=6.0.0'}
+    dependencies:
+      '@contentful/rich-text-types': 16.0.2
+    dev: false
+
   /@contentful/rich-text-types/16.0.2:
     resolution: {integrity: sha512-ovbmCKQjlyGek4NuABoqDesC3FBV3e5jPMMdtT2mpOy9ia31MKO0NSFMRGZu7Q+veZzmDMja8S1i/XeFCUT9Pw==}
     engines: {node: '>=6.0.0'}
@@ -792,6 +805,10 @@ packages:
   /@types/json5/0.0.30:
     resolution: {integrity: sha512-sqm9g7mHlPY/43fcSNrCYfOeX9zkTTK+euO5E6+CVijSMm5tTjkVdwdqRkY3ljjIAf8679vps5jKUoJBCLsMDA==}
     dev: false
+
+  /@types/lodash/4.14.191:
+    resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
+    dev: true
 
   /@types/mdast/3.0.10:
     resolution: {integrity: sha512-W864tg/Osz1+9f4lrGTZpCSO5/z4608eUp19tbozkq2HJK6i3z1kT0H9tlADXuYIb1YYOBByU4Jsqkk75q48qA==}
@@ -2125,6 +2142,10 @@ packages:
 
   /lodash.isstring/4.0.1:
     resolution: {integrity: sha512-0wJxfxH1wgO3GrbuP+dTTk7op+6L41QCXbGINEmD+ny/G/eCqGzxyCsh7159S+mgDDcoarnBw6PC1PS5+wUGgw==}
+    dev: false
+
+  /lodash/4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: false
 
   /log-symbols/5.1.0:

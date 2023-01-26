@@ -1,0 +1,28 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { contentfulClient } from "../../lib/contentful";
+import type { BlogPost } from "../../lib/contentful";
+
+export async function getStaticPaths() {
+  const { items } = await contentfulClient.getEntries<BlogPost>({
+    content_type: "blogPost",
+  });
+
+  const pages = items.map((item) => ({
+    params: { slug: item.fields.slug },
+    props: {
+      title: item.fields.title
+    },
+  }));
+
+  return pages;
+}
+
+const { title } = Astro.props;
+---
+
+<Layout title={title + "WhatFor"}>
+  <main class="mx-auto max-w-lg">
+    <h1 class="text-3xl">{title}</h1>
+  </main>
+</Layout>

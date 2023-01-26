@@ -2,36 +2,47 @@
 import Layout from "../layouts/Layout.astro";
 import { contentfulClient } from "../lib/contentful";
 import type { BlogPost } from "../lib/contentful";
+import AuthorBadge from "../components/authorBadge";
+import { calculateTTR } from "../lib/ttr";
+import PostInfo from "../components/postInfo";
 
 const entries = await contentfulClient.getEntries<BlogPost>({
 	content_type: "blogPost",
 });
 
 const posts = entries.items.map((item) => {
-	const { title, date, description, slug } = item.fields;
+	const { title, date, description, slug, author, topicTags } = item.fields;
 	return {
 		title,
 		slug,
 		description,
 		date: new Date(date).toLocaleDateString(),
+		author: author.fields,
+		topicTags,
+		ttr: calculateTTR(item.fields.content),
 	};
 });
 ---
 
-<Layout title="WhatFor">
-	<main class="space-y-3 mx-auto max-w-lg">
-		<h1 class="text-4xl">CW Blog</h1>
+<Layout title="WhatFor | Technical Blog">
+	<main class="space-y-5 mx-auto max-w-5xl">
+		<h1 class="text-4xl">Chris Walker Technical Blog</h1>
 		{
 			posts.map((post) => (
-				<ul class="">
+				<div class="bg-slate-400">
 					<a class="" href={`/blog/${post.slug}/`}>
 						<h2 class="text-2xl underline">{post.title}</h2>
 					</a>
-					<time class="bg-blue-200 text-blue-800 rounded-full px-2 pt-0.5 pb-1 text-sm font-bold">
-						{post.date}
-					</time>
+					<div>
+						<AuthorBadge author={post.author} />
+					</div>
+					<PostInfo
+						ttr={post.ttr}
+						tags={post.topicTags}
+						date={post.date}
+					/>
 					<p>{post.description}</p>
-				</ul>
+				</div>
 			))
 		}
 	</main>
