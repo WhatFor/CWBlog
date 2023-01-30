@@ -1,11 +1,22 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { contentfulClient } from "../../lib/contentful";
+import { Author, contentfulClient } from "../../lib/contentful";
 import type { BlogPost } from "../../lib/contentful";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import AuthorBadge from "../../components/authorBadge";
 import { calculateTTR } from "../../lib/ttr";
 import PostInfo from "../../components/postInfo";
+
+interface Props {
+  title: string;
+  description: string;
+  date: string;
+  author: Author;
+  tags: string[];
+  moreReading: BlogPost[];
+  ttr: number;
+  content: string;
+}
 
 export async function getStaticPaths() {
   const { items } = await contentfulClient.getEntries<BlogPost>({
@@ -18,18 +29,18 @@ export async function getStaticPaths() {
       title: item.fields.title,
       description: item.fields.description,
       author: item.fields.author.fields,
-      topicTags: item.fields.topicTags,
       content: documentToHtmlString(item.fields.content),
       date: new Date(item.fields.date).toLocaleDateString(),
       moreReading: item.fields.moreReading.map((x) => x.fields),
       ttr: calculateTTR(item.fields.content),
+      tags: item.metadata.tags.map((x) => x.sys.id),
     },
   }));
 
   return pages;
 }
 
-const { title, description, author, topicTags, content, date, moreReading, ttr } =
+const { title, description, author, tags, content, date, moreReading, ttr } =
   Astro.props;
 ---
 
@@ -37,7 +48,7 @@ const { title, description, author, topicTags, content, date, moreReading, ttr }
   <main class="mx-auto max-w-lg">
     <h1 class="text-3xl">{title}</h1>
     <AuthorBadge author={author} />
-    <PostInfo ttr={ttr} date={date} tags={topicTags} />
+    <PostInfo ttr={ttr} date={date} tags={tags} />
     <hr />
     <article set:html={content} />
     <hr />

@@ -11,14 +11,14 @@ const entries = await contentfulClient.getEntries<BlogPost>({
 });
 
 const posts = entries.items.map((item) => {
-	const { title, date, description, slug, author, topicTags } = item.fields;
+	const { title, date, description, slug, author } = item.fields;
 	return {
 		title,
 		slug,
 		description,
 		date: new Date(date).toLocaleDateString(),
 		author: author.fields,
-		topicTags,
+		tags: item.metadata.tags.map(x => x.sys.id),
 		ttr: calculateTTR(item.fields.content),
 	};
 });
@@ -38,7 +38,7 @@ const posts = entries.items.map((item) => {
 					</div>
 					<PostInfo
 						ttr={post.ttr}
-						tags={post.topicTags}
+						tags={post.tags}
 						date={post.date}
 					/>
 					<p>{post.description}</p>

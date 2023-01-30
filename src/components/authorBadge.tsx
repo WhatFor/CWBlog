@@ -5,7 +5,7 @@ interface Props {
     author: Author;
 }
 
-const UserBadge = ({ author }: Props) => {
+const AuthorBadge = ({ author }: Props) => {
     return (
         <div className="bg-slate-50 p-2 rounded-md inline-flex items-center shadow">
             <div>
@@ -31,4 +31,4 @@ const UserBadge = ({ author }: Props) => {
     )
 };
 
-export default UserBadge;
+export default AuthorBadge;
