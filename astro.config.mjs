@@ -5,6 +5,7 @@ import vercel from "@astrojs/vercel/static";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
+  site: process.env.SITE_URL,
   integrations: [react(), tailwind(), sitemap()],
   output: "static",
   adapter: vercel()
