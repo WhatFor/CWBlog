@@ -1,11 +1,24 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { contentfulClient } from "../../lib/contentful";
+import Layout from "../../layouts/Layout.astro";
+import { Author, contentfulClient } from "../../lib/contentful";
 import type { BlogPost } from "../../lib/contentful";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import AuthorBadge from "../../components/authorBadge";
+import { calculateTTR } from "../../lib/ttr";
+import PostInfo from "../../components/postInfo";
+
+interface Props {
+  title: string;
+  description: string;
+  date: string;
+  author: Author;
+  tags: string[];
+  moreReading: BlogPost[];
+  ttr: number;
+  content: string;
+}
 
 export async function getStaticPaths() {
-
   const { items } = await contentfulClient.getEntries<BlogPost>({
     content_type: "blogPost",
   });
@@ -14,23 +27,36 @@ export async function getStaticPaths() {
     params: { slug: item.fields.slug },
     props: {
       title: item.fields.title,
+      description: item.fields.description,
+      author: item.fields.author.fields,
       content: documentToHtmlString(item.fields.content),
       date: new Date(item.fields.date).toLocaleDateString(),
+      moreReading: item.fields.moreReading.map((x) => x.fields),
+      ttr: calculateTTR(item.fields.content),
+      tags: item.metadata.tags.map((x) => x.sys.id),
     },
   }));
 
   return pages;
 }
 
-const { content, title, date } = Astro.props;
+const { title, description, author, tags, content, date, moreReading, ttr } =
+  Astro.props;
 ---
 
 <Layout title={title + "WhatFor"}>
-    <main class="mx-auto max-w-lg">
-        <h1 class="text-3xl">{title}</h1>
-        <time class="bg-blue-200 text-blue-800 rounded-full px-2 pt-0.5 pb-1 text-sm font-bold">
-            {date}
-        </time>
-        <article set:html={content} />
-    </main>
+  <main class="mx-auto max-w-lg">
+    <h1 class="text-3xl">{title}</h1>
+    <AuthorBadge author={author} />
+    <PostInfo ttr={ttr} date={date} tags={tags} />
+    <hr />
+    <article set:html={content} />
+    <hr />
+    <h3 class="mt-3">More reading:</h3>
+    {
+      moreReading.map((blogPost: BlogPost) => (
+        <a href={"/blog/" + blogPost.slug}>{blogPost.title}</a>
+      ))
+    }
+  </main>
 </Layout>

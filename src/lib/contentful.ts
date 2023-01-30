@@ -2,11 +2,38 @@ import contentful from "contentful";
 import type { Document } from "@contentful/rich-text-types";
 
 export interface BlogPost {
-  title: string;
-  date: string;
-  description: string;
-  content: Document;
-  slug: string;
+    title: string;
+    date: string;
+    author: Child<Author>;
+    description: string;
+    topicTags: string[];
+    content: Document;
+    slug: string;
+    moreReading: Child<BlogPost>[];
+}
+
+export interface Author {
+    name: string;
+    gitHubHandle: string;
+    profilePicture: Child<Image>;
+}
+
+export interface Child<T> {
+    metadata: any;
+    sys: any;
+    fields: T;
+}
+
+export interface Image {
+    title: string;
+    description: string;
+    file: ImageFile;
+}
+
+export interface ImageFile {
+    url: string;
+    filename: string;
+    contentType: string;
 }
 
 export const contentfulClient = contentful.createClient({

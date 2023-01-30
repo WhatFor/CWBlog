@@ -1,0 +1,79 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Author, contentfulClient } from "../../lib/contentful";
+import type { BlogPost } from "../../lib/contentful";
+import { calculateTTR } from "../../lib/ttr";
+import PostInfo from "../../components/postInfo";
+import AuthorBadge from "../../components/authorBadge";
+
+interface Props {
+  posts: Post[];
+}
+
+interface Post {
+  title: string;
+  slug: string;
+  description: string;
+  date: string;
+  author: Author;
+  tags: string[];
+  ttr: number;
+}
+
+export async function getStaticPaths() {
+  const { items: allTags } = await contentfulClient.getTags({});
+  let groups: any[] = [];
+
+  for (let i = 0; i < allTags.length; i++) {
+    const tag = allTags[i].sys.id;
+
+    const posts = await contentfulClient.getEntries<BlogPost>({
+      content_type: "blogPost",
+      "metadata.tags.sys.id[in]": tag,
+    });
+
+    groups.push({
+      tag,
+      posts: posts.items.map((item) => ({
+        title: item.fields.title,
+        slug: item.fields.slug,
+        description: item.fields.description,
+        date: new Date(item.fields.date).toLocaleDateString(),
+        author: item.fields.author.fields,
+        tags: item.metadata.tags.map((x) => x.sys.id),
+        ttr: calculateTTR(item.fields.content),
+      })),
+    });
+  }
+
+  return groups.map((group) => ({
+    params: { tag: group.tag },
+    props: {
+      posts: group.posts,
+    },
+  }));
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<Layout title={tag + "WhatFor"}>
+  <main class="mx-auto max-w-lg">
+    <h1 class="text-3xl">{tag}</h1>
+    {
+      posts.map((post) => (
+        <div class="bg-slate-400">
+          <a class="" href={`/blog/${post.slug}/`}>
+            <h2 class="text-2xl underline">{post.title}</h2>
+          </a>
+          <div>
+            <AuthorBadge author={post.author} />
+          </div>
+          <PostInfo ttr={post.ttr} tags={post.tags} date={post.date} />
+          <p>{post.description}</p>
+        </div>
+      ))
+    }
+  </main>
+</Layout>

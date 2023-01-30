@@ -7,5 +7,5 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   integrations: [react(), tailwind(), sitemap()],
   output: "static",
-  adapter: vercel(),
+  adapter: vercel()
 });
