@@ -5,6 +5,8 @@ export interface Props {
 	title: string;
 }
 
+const ga_key = process.env.GA_MEASUREMENT_ID;
+
 const { title } = Astro.props;
 ---
 
@@ -15,7 +17,7 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<title>{title}</title>
-		<script async src={"https://www.googletagmanager.com/gtag/js?id=" + process.env.GA_MEASUREMENT_ID}></script>
+		<script async src={"https://www.googletagmanager.com/gtag/js?id=" + ga_key}></script>
 		<script type="text/partytown">
 			// @ts-ignore
 			window.dataLayer = window.dataLayer || [];
@@ -24,7 +26,7 @@ const { title } = Astro.props;
 			// @ts-ignore
 			gtag('js', new Date());
 			// @ts-ignore
-			gtag('config', process.env.GA_MEASUREMENT_ID);
+			gtag('config', ga_key);
 		</script>
 	</head>
 	<body>
