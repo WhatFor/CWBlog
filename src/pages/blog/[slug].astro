@@ -6,6 +6,7 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import AuthorBadge from "../../components/authorBadge";
 import { calculateTTR } from "../../lib/ttr";
 import PostInfo from "../../components/postInfo";
+import ProgressBar from "../../components/progressBar";
 
 interface Props {
   title: string;
@@ -46,6 +47,9 @@ const { title, description, author, tags, content, date, moreReading, ttr } =
 
 <Layout title={title + "WhatFor"}>
   <main class="mx-auto max-w-lg">
+    {ttr >= 3 && (
+      <ProgressBar client:load />
+    )}
     <h1 class="text-3xl">{title}</h1>
     <AuthorBadge author={author} />
     <PostInfo ttr={ttr} date={date} tags={tags} />
