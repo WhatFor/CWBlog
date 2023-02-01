@@ -10,7 +10,7 @@ const entries = await contentfulClient.getEntries<BlogPost>({
 });
 
 const posts = entries.items.map((item) => {
-	const { title, date, description, slug, author } = item.fields;
+	const { title, date, description, slug, author, suggestedReading, coverImage, coverImageAlt } = item.fields;
 	return {
 		title,
 		slug,
@@ -19,6 +19,9 @@ const posts = entries.items.map((item) => {
 		author: author.fields,
 		tags: item.metadata.tags.map(x => x.sys.id),
 		ttr: calculateTTR(item.fields.content),
+		suggestedReading: suggestedReading,
+		coverImageUrl: coverImage?.fields?.file?.url,
+		coverImageAlt: coverImageAlt,
 	} as ContentlessPost;
 });
 ---

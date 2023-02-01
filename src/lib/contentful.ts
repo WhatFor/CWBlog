@@ -7,7 +7,10 @@ export interface BlogPost {
     author: Child<Author>;
     description: string;
     slug: string;
-    content?: Document;
+    content: Document;
+    suggestedReading: boolean;
+    coverImage: Child<Image>;
+    coverImageAlt?: string;
     moreReading?: Child<BlogPost>[];
 }
 

@@ -31,6 +31,8 @@ export async function getStaticPaths() {
         author: item.fields.author.fields,
         tags: item.metadata.tags.map((x) => x.sys.id),
         ttr: calculateTTR(item.fields.content),
+        suggestedReading: item.fields.suggestedReading,
+		    coverImageUrl: item.fields.coverImage?.fields?.file?.url,
       })),
     });
   }

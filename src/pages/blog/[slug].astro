@@ -32,17 +32,31 @@ export async function getStaticPaths() {
       author: item.fields.author.fields,
       content: documentToHtmlString(item.fields.content),
       date: new Date(item.fields.date).toLocaleDateString(),
-      moreReading: item.fields.moreReading.map((x) => x.fields),
+      moreReading: item.fields.moreReading?.map((x) => x.fields),
       ttr: calculateTTR(item.fields.content),
       tags: item.metadata.tags.map((x) => x.sys.id),
+      suggestedReading: item.fields.suggestedReading,
+      coverImageUrl: item.fields.coverImage?.fields?.file?.url,
+      coverImageAlt: item.fields.coverImageAlt,
     },
   }));
 
   return pages;
 }
 
-const { title, description, author, tags, content, date, moreReading, ttr } =
-  Astro.props;
+const {
+  title,
+  description,
+  author,
+  tags,
+  content,
+  date,
+  moreReading,
+  ttr,
+  coverImageUrl,
+  coverImageAlt,
+  suggestedReading,
+} = Astro.props;
 ---
 
 <Layout title={title + "WhatFor"}>
@@ -50,7 +64,8 @@ const { title, description, author, tags, content, date, moreReading, ttr } =
     {ttr >= 3 && <ProgressBar client:load />}
     <h1 class="text-3xl">{title}</h1>
     <AuthorBadge author={author} />
-    <PostInfo ttr={ttr} date={date} tags={tags} />
+    <PostInfo ttr={ttr} date={date} authorName={author.name} />
+    <p>Suggested? {suggestedReading ? "Yes": "No"}</p>
     <hr />
     <article set:html={content} />
     <hr />
