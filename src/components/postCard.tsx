@@ -18,7 +18,7 @@ export interface ContentlessPost {
 
 const PostCard = ({ post }: Props) => {
     return (
-        <div className="w-full flex flex-col bg-white shadow border border-indigo-100 border-l-indigo-200 border-l-4 rounded-md px-8 py-7">
+        <div className="w-full flex flex-col bg-white shadow border border-indigo-100 lg:border-l-indigo-200 lg:border-l-4 lg:rounded-md px-6 lg:px-8 py-5 lg:py-7">
             <PostInfo
                 className="mb-3"
                 authorName={post.author.name}
