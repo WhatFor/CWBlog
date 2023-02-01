@@ -13,6 +13,7 @@ const PostInfo = ({ ttr, date, tags }: Props) => {
             <p className="text-gray-600 whitespace-nowrap">{ttr} minute read</p>
             {tags?.map(tag => (
                 <a
+                    key={tag}
                     href={"/tags/" + tag}
                     className="rounded-full whitespace-nowrap font-mono shadow shadow-purple-200 font-medium bg-gray-100 text-gray-500 hover:bg-purple-100 hover:underline text-sm px-2 py-0.5"
                 >

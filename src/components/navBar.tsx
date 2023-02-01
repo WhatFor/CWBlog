@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import ghIcon from "../../public/images/github-mark.svg";
+import ghIcon from "../images/github-mark.svg";
 
 const NavLinks = [
     { name: "Home", link: "/" },
@@ -32,6 +32,7 @@ const NavBar = () => {
                         <nav className="w-full grid grid-cols-3 justify-items-stretch">
                             {NavLinks.map(link => (
                                 <a
+                                    key={link.link}
                                     className="text-black text-center px-5 py-2.5 hover:underline"
                                     href={link.link}>
                                     {link.name}
@@ -47,6 +48,7 @@ const NavBar = () => {
                 <nav className="w-2/3 lg:w-1/3 grid grid-cols-3 justify-items-stretch">
                     {NavLinks.map(link => (
                         <a
+                            key={link.link}
                             className="text-black text-center px-5 py-3 hover:underline hover:bg-indigo-100"
                             href={link.link}>
                             {link.name}

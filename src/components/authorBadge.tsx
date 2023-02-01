@@ -1,5 +1,5 @@
 import type { Author } from "../lib/contentful";
-import ghIcon from "../../public/images/github-mark.svg";
+import ghIcon from "../images/github-mark.svg";
 
 interface Props {
     author: Author;
