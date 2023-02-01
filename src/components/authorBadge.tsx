@@ -7,7 +7,7 @@ interface Props {
 
 const AuthorBadge = ({ author }: Props) => {
     return (
-        <div className="bg-slate-50 p-2 rounded-md inline-flex items-center shadow">
+        <div className="bg-indigo-50 p-2 rounded-md inline-flex items-center shadow-md border border-indigo-100 shadow-indigo-100">
             <div>
                 <img
                     alt={author.profilePicture.fields.description}

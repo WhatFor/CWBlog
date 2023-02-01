@@ -6,10 +6,9 @@ export interface BlogPost {
     date: string;
     author: Child<Author>;
     description: string;
-    topicTags: string[];
-    content: Document;
     slug: string;
-    moreReading: Child<BlogPost>[];
+    content?: Document;
+    moreReading?: Child<BlogPost>[];
 }
 
 export interface Author {

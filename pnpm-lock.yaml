@@ -9,10 +9,12 @@ specifiers:
   '@contentful/rich-text-html-renderer': ^16.0.2
   '@contentful/rich-text-plain-text-renderer': ^16.0.2
   '@contentful/rich-text-types': ^16.0.2
+  '@fontsource/roboto': ^4.5.8
   '@types/lodash': ^4.14.191
   '@types/react': ^18.0.21
   '@types/react-dom': ^18.0.6
   astro: ^2.0.1
+  classnames: ^2.3.2
   contentful: ^9.2.20
   framer-motion: ^8.5.5
   lodash: ^4.17.21
@@ -30,9 +32,11 @@ dependencies:
   '@contentful/rich-text-html-renderer': 16.0.2
   '@contentful/rich-text-plain-text-renderer': 16.0.2
   '@contentful/rich-text-types': 16.0.2
+  '@fontsource/roboto': 4.5.8
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
   astro: 2.0.1_sass@1.57.1
+  classnames: 2.3.2
   contentful: 9.2.20
   framer-motion: 8.5.5_biqbaboplfbrettd7655fr4n2y
   lodash: 4.17.21
@@ -677,6 +681,10 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@fontsource/roboto/4.5.8:
+    resolution: {integrity: sha512-CnD7zLItIzt86q4Sj3kZUiLcBk1dSk81qcqgMGaZe7SQ1P8hFNxhMl5AZthK1zrDM5m74VVhaOpuMGIL4gagaA==}
+    dev: false
 
   /@jridgewell/gen-mapping/0.1.1:
     resolution: {integrity: sha512-sQXCasFk+U8lWYEe66WxRDOE9PjVz4vSM51fTu3Hw+ClTpUSQb718772vH3pyS5pShp6lvQM7SxgIDXXXmOX7w==}
@@ -1354,6 +1362,10 @@ packages:
   /ci-info/3.7.1:
     resolution: {integrity: sha512-4jYS4MOAaCIStSRwiuxc4B8MYhIe676yO1sYGzARnjXkWpmzZMMYxY6zu8WYWDhSuth5zhrQ1rhNSibyyvv4/w==}
     engines: {node: '>=8'}
+    dev: false
+
+  /classnames/2.3.2:
+    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
     dev: false
 
   /cli-boxes/3.0.0:
