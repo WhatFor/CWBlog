@@ -34,7 +34,7 @@ const recommendedPosts = posts.filter(x => x.suggestedReading);
             <h2 class="text-gray-500">Recommended</h2>
             {recommendedPosts.map(post => (
                 <div>
-                    <a class="text-sm hover:underline" href={"/posts/" + post.slug}>{post.title}</a>
+                    <a class="text-sm hover:underline" href={"/blog/" + post.slug}>{post.title}</a>
                 </div>
             ))}
         </div>
