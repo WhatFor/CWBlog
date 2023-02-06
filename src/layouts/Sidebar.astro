@@ -1,9 +1,9 @@
 ---
-import { map } from "lodash";
+import About from "../components/about";
 import type { ContentlessPost } from "../components/postCard";
+import RecommendedPosts from "../components/recommendedPosts";
 import { BlogPost, contentfulClient } from "../lib/contentful";
 import { calculateTTR } from "../lib/ttr";
-import pp from "../images/pp.jpg";
 
 const entries = await contentfulClient.getEntries<BlogPost>({
 	content_type: "blogPost",
@@ -24,19 +24,9 @@ const posts = entries.items.map((item) => {
 const recommendedPosts = posts.filter(x => x.suggestedReading);
 ---
 
-<div class="w-full">
-    <div class="sticky top-10 rounded border shadow-sm bg-white divide-y divide-solid">
-        <div class="p-5">
-            <h1>About WhatFor</h1>
-            <img class="rounded-full p-10" src={pp} alt="A Photo of Chris Walker." />
-        </div>
-        <div class="p-5">
-            <h2 class="text-gray-500">Recommended</h2>
-            {recommendedPosts.map(post => (
-                <div>
-                    <a class="text-sm hover:underline" href={"/blog/" + post.slug}>{post.title}</a>
-                </div>
-            ))}
-        </div>
+<div class="w-full mr-5">
+    <div class="sticky top-10 border-r-indigo-200 border-r-4 rounded-md border shadow-sm bg-white divide-y divide-solid">
+        <About />
+        <RecommendedPosts posts={recommendedPosts} />
     </div>
 </div>

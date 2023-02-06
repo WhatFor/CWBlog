@@ -13,7 +13,7 @@ const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-gray-100">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -35,11 +35,13 @@ const { title } = Astro.props;
 	<body>
 		<TopLinkButton client:load />
 		<NavBar client:load />
-		<div class="flex space-x-12 max-w-7xl mx-auto">
-			<div class="w-full lg:w-3/4">
+		<div class="w-full h-96 -z-10 absolute top-0 bg-texture"></div>
+		<div class="w-full h-96 -z-10 absolute top-0 bg-gradient-to-t from-gray-100"></div>
+		<div class="flex space-x-8 max-w-7xl mx-auto mt-4 lg:mt-12">
+			<div class="w-full ml-0 lg:ml-3 lg:w-9/12">
 				<slot />
 			</div>
-			<div class="hidden lg:flex w-1/4" style="margin-top: 75px;">
+			<div class="hidden lg:flex w-3/12">
 				<Sidebar />
 			</div>
 		</div>

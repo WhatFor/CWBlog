@@ -28,12 +28,12 @@ const NavBar = () => {
                         animate={{ y: 0 }}
                         exit={{ y: -100 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed flex mx-auto justify-between inset-x-0 top-2 lg:top-4 z-0 lg:z-10 w-full lg:w-1/3 bg-white rounded-none lg:rounded-xl shadow">
+                        className="fixed flex mx-auto justify-between inset-x-0 top-0 lg:top-4 z-0 lg:z-10 w-full lg:w-1/3 bg-white rounded-none lg:rounded-xl shadow">
                         <nav className="w-full grid grid-cols-3 justify-items-stretch">
                             {NavLinks.map(link => (
                                 <a
                                     key={link.link}
-                                    className="text-black text-center px-5 py-2.5 hover:underline"
+                                    className="text-black text-center px-5 py-3 hover:underline"
                                     href={link.link}>
                                     {link.name}
                                 </a>
@@ -44,7 +44,10 @@ const NavBar = () => {
                 )}
             </AnimatePresence>
             <div className="flex w-full justify-between bg-white z-20 shadow-sm mb-2">
-                <div></div>
+                <a href="/" className="hidden lg:block text-gray-700 font-bold py-3 pl-5 pr-6 hover:bg-indigo-100 hover:underline">
+                    WhatFor
+                </a>
+                <div className="block lg:hidden"></div>
                 <nav className="w-2/3 lg:w-1/3 grid grid-cols-3 justify-items-stretch">
                     {NavLinks.map(link => (
                         <a
@@ -55,7 +58,7 @@ const NavBar = () => {
                         </a>
                     ))}
                 </nav>
-                <div className="pr-3 py-3">
+                <div className="pl-8 pr-3 py-3">
                     <a href="https://github.com/WhatFor">
                         <img alt="GitHub Logo" src={ghIcon} className="inline-flex w-6 h-6 mr-1 mb-0.5" />
                     </a>
