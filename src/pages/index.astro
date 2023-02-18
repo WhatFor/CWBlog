@@ -5,9 +5,18 @@ import type { BlogPost } from "../lib/contentful";
 import { calculateTTR } from "../lib/ttr";
 import PostCard, { ContentlessPost } from "../components/postCard";
 
+// TODO: Paginate
+const pageSize = 3;
+const pageNumber = 1;
+
 const entries = await contentfulClient.getEntries<BlogPost>({
 	content_type: "blogPost",
+	order: "-fields.date",
+	limit: pageSize,
+	skip: (pageNumber - 1) * pageSize,
 });
+
+const totalItemCount = entries.total;
 
 const posts = entries.items.map((item) => {
 	const { title, date, description, slug, author, suggestedReading, coverImage, coverImageAlt } = item.fields;
@@ -28,10 +37,8 @@ const posts = entries.items.map((item) => {
 
 <Layout title="WhatFor | Technical Blog">
 	<main class="space-y-5 mx-auto max-w-5xl">
-		{
-			posts.map((post) => (
-				<PostCard post={post} />
-			))
-		}
+		{posts.map(post => (
+			<PostCard post={post} />
+		))}
 	</main>
 </Layout>
