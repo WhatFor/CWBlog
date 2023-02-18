@@ -1,8 +1,10 @@
 import type { Document } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { MARKS } from '@contentful/rich-text-types';
 import Prism from "prismjs";
 import { useEffect } from "react";
+
+import ContentfulTypes from '@contentful/rich-text-types';
+const { MARKS } = ContentfulTypes;
 
 // Manually load any required non-default languages
 import "prismjs/components/prism-jsx.min"
