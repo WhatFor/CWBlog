@@ -2,12 +2,12 @@
 import Layout from "../../layouts/Layout.astro";
 import { Author, contentfulClient } from "../../lib/contentful";
 import type { BlogPost } from "../../lib/contentful";
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import AuthorBadge from "../../components/authorBadge";
 import { calculateTTR } from "../../lib/ttr";
 import PostInfo from "../../components/postInfo";
 import ProgressBar from "../../components/progressBar";
-import "../../styles/blogPost.scss";
+import BlogContent from "../../components/blogContent";
+import type { Document } from "@contentful/rich-text-types";
 
 interface Props {
   title: string;
@@ -17,7 +17,7 @@ interface Props {
   tags: string[];
   moreReading: BlogPost[];
   ttr: number;
-  content: string;
+  content: Document;
 }
 
 export async function getStaticPaths() {
@@ -31,7 +31,7 @@ export async function getStaticPaths() {
       title: item.fields.title,
       description: item.fields.description,
       author: item.fields.author.fields,
-      content: documentToHtmlString(item.fields.content),
+      content: item.fields.content,
       date: new Date(item.fields.date).toLocaleDateString(),
       moreReading: item.fields.moreReading?.map((x) => x.fields),
       ttr: calculateTTR(item.fields.content),
@@ -45,37 +45,66 @@ export async function getStaticPaths() {
   return pages;
 }
 
-const {
-  title,
-  description,
-  author,
-  tags,
-  content,
-  date,
-  moreReading,
-  ttr,
-  coverImageUrl,
-  coverImageAlt,
-  suggestedReading,
-} = Astro.props;
+const { title, author, content, date, moreReading, ttr } = Astro.props;
 ---
 
 <Layout title={title + "WhatFor"}>
-  <main id="blog-post" class="bg-white mb-10 space-y-4 flex flex-col w-full p-5 lg:border-l-indigo-200 lg:border-l-4 lg:rounded-md lg:border shadow-sm">
+  <main
+    id="blog-post"
+    class="bg-white mb-10 space-y-4 flex flex-col w-full p-5 lg:border-l-indigo-200 lg:border-l-4 lg:rounded-md lg:border shadow-sm"
+  >
     {ttr >= 3 && <ProgressBar client:load />}
-    <h1 class="text-3xl">{title}</h1>
+    <h1 class="text-3xl">
+      {title}
+    </h1>
     <PostInfo ttr={ttr} date={date} authorName={author.name} />
     <hr />
-    <!-- todo: need to remove ws above content -->
-    <article class="px-3 lg:px-8" id="blog-post-content" set:html={content} /> 
-    <div>
-      <AuthorBadge author={author} />
+    <BlogContent client:load body={content} />
+    <div class="flex flex-col space-y-6">
+      <div
+        class="flex flex-col space-y-2 bg-white p-5 rounded-md shadow border shadow-indigo-100"
+      >
+        <h3 class="text-lg text-indigo-800 flex space-x-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
+            ></path>
+          </svg>
+          <span>Interested in some more?</span>
+        </h3>
+        <div class="flex flex-col space-y-3 px-5">
+          {
+            moreReading.map((blogPost: BlogPost) => (
+              <a href={"/blog/" + blogPost.slug} class="flex space-x-1 hover:underline">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-5 h-5 mt-0.5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                  />
+                </svg>
+                <span>{blogPost.title}</span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
     </div>
-    <h3 class="mt-3">More reading:</h3>
-    {
-      moreReading.map((blogPost: BlogPost) => (
-        <a href={"/blog/" + blogPost.slug}>{blogPost.title}</a>
-      ))
-    }
   </main>
 </Layout>
