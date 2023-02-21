@@ -1,5 +1,5 @@
 const PaginationConsts = {
-    itemsPerPage: 10,
+    itemsPerPage: 1,
 };
 
 export default PaginationConsts;

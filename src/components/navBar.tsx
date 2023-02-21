@@ -29,7 +29,7 @@ const NavBar = () => {
                         exit={{ y: -100 }}
                         transition={{ duration: 0.3 }}
                         className="fixed flex mx-auto justify-between inset-x-0 top-0 lg:top-4 z-0 lg:z-10 w-full lg:w-1/3 bg-white rounded-none lg:rounded-xl shadow">
-                        <nav className="w-full grid grid-cols-3 justify-items-stretch">
+                        <nav className="w-full grid grid-cols-2 justifzy-items-stretch">
                             {NavLinks.map(link => (
                                 <a
                                     key={link.link}
@@ -47,8 +47,9 @@ const NavBar = () => {
                 <a href="/" className="hidden lg:block text-gray-700 font-bold py-3 pl-5 pr-6 hover:bg-indigo-100 hover:underline">
                     WhatFor
                 </a>
+                <div className="block lg:hidden">{/* Spacer for mobile */}</div>
                 <div className="block lg:hidden"></div>
-                <nav className="w-2/3 lg:w-1/3 grid grid-cols-3 justify-items-stretch">
+                <nav className="w-2/3 lg:w-1/3 grid grid-cols-2 justify-items-stretch">
                     {NavLinks.map(link => (
                         <a
                             key={link.link}
@@ -60,7 +61,7 @@ const NavBar = () => {
                 </nav>
                 <div className="pl-8 pr-3 py-3">
                     <a href="https://github.com/WhatFor">
-                        <img alt="GitHub Logo" src={ghIcon} className="inline-flex w-6 h-6 mr-1 mb-0.5" />
+                        <img alt="GitHub Logo" src={ghIcon.src} className="inline-flex w-6 h-6 mr-1 mb-0.5" />
                     </a>
                 </div>
             </div>

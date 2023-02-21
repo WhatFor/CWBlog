@@ -1,6 +1,8 @@
-import type { Author, BlogPost } from "../lib/contentful"
+import classNames from "classnames";
+import type { Author } from "../lib/contentful"
 import PostInfo from "./postInfo";
 import Tag from "./tag";
+import { Image } from '@astrojs/image/components';
 
 interface Props {
     post: ContentlessPost;
@@ -24,11 +26,24 @@ const PostCard = ({ post }: Props) => {
         <div>
             {post.coverImageUrl && (
                 <div className="max-h-72">
-                    {/* TODO: Use a real image haha, and try the astro <Image/> */}
-                    {/* <div alt={post.coverImageAlt} className="bg-center bg-cover h-72 w-full" style={{ backgroundImage: "url('"+post.coverImageUrl+"')" }} /> */}
+                    <a href={"/blog/" + post.slug}>
+                        {/* TODO: Not working - throws error? */}
+                        {/* <Image
+                            src={"https:" + post.coverImageUrl}
+                            alt={post.coverImageAlt}
+                            width={900}
+                            height={250}
+                            fit={"cover"}
+                            format={"jpg"}
+                            //className="border shadow bg-gray-200 h-72 w-full lg:rounded-t-md"
+                        /> */}
+                    </a>
                 </div>
             )}
-            <div className="w-full flex flex-col bg-white shadow border border-indigo-100 lg:border-l-indigo-200 lg:border-l-4 lg:rounded-md px-6 lg:px-8 py-5 lg:py-7">
+            <div className={classNames(
+                    "w-full flex flex-col bg-white shadow border border-indigo-100",
+                    "lg:border-l-indigo-200 lg:border-l-4 lg:rounded-md px-6 lg:px-8 py-5 lg:py-7",
+                    post.coverImageUrl ? "lg:rounded-t-none lg:rounded-b-4" : "lg:rounded-md")}>
                 <PostInfo
                     className="mb-3"
                     authorName={post.author.name}
@@ -45,7 +60,7 @@ const PostCard = ({ post }: Props) => {
                 <div className="flex justify-between">
                     <div className="flex space-x-3">
                         {post.tags.map(tag => (
-                            <Tag tag={tag} />
+                            <Tag key={tag} tag={tag} />
                         ))}
                     </div>
                 </div>
