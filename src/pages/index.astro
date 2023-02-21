@@ -4,13 +4,12 @@ import { contentfulClient } from "../lib/contentful";
 import type { BlogPost } from "../lib/contentful";
 import { calculateTTR } from "../lib/ttr";
 import PostCard, { ContentlessPost } from "../components/postCard";
-
-const pageSize = 10;
+import PaginationConsts from "../consts/paginationConsts";
 
 const entries = await contentfulClient.getEntries<BlogPost>({
 	content_type: "blogPost",
 	order: "-fields.date",
-	limit: pageSize
+	limit: PaginationConsts.itemsPerPage,
 });
 
 const totalItemCount = entries.total;
@@ -37,13 +36,13 @@ const posts = entries.items.map((item) => {
 		{posts.map(post => (
 			<PostCard post={post} />
 		))}
-		{totalItemCount > pageSize && (
+		{totalItemCount > PaginationConsts.itemsPerPage && (
 			<div class="flex justify-center">
 				<a
 					class="text-lg text-gray-500 rounded px-4 py-2 hover:bg-violet-600 hover:text-gray-50"
 					href="/page/1"
 				>
-					View more
+					See all posts
 				</a>
 			</div>
 		)}

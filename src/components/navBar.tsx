@@ -5,7 +5,7 @@ import ghIcon from "../images/github-mark.svg";
 const NavLinks = [
     { name: "Home", link: "/" },
     { name: "Tags", link: "/tags" },
-    { name: "About", link: "/about" },
+    //{ name: "About", link: "/about" },
 ]
 
 const NavBar = () => {
