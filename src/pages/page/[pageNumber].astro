@@ -1,9 +1,9 @@
 ---
-import PostCard, { ContentlessPost } from "../../components/postCard";
 import Layout from "../../layouts/Layout.astro";
-import { BlogPost, contentfulClient } from "../../lib/contentful";
+import { BlogPost, contentfulClient, ContentlessPost } from "../../lib/contentful";
 import { calculateTTR } from "../../lib/ttr";
 import PaginationConsts from "../../consts/paginationConsts";
+import PostCard from "../../components/postCard.astro";
 
 interface Props {
 	posts: ContentlessPost[];
@@ -73,7 +73,7 @@ const { posts, hasNextPage, hasPrevPage } = Astro.props;
 
 <Layout title="WhatFor | Technical Blog">
 	<main class="space-y-5 mx-auto max-w-5xl">
-		<div
+		<!-- <div
 			class="flex space-y-4 flex-col lg:border-l-indigo-200 lg:border-l-4 lg:rounded-md border shadow-sm bg-white px-5 py-4"
 		>
 			<h1 class="text-gray-700 text-xl w-full flex space-x-2">
@@ -95,8 +95,10 @@ const { posts, hasNextPage, hasPrevPage } = Astro.props;
 					Page {pageNumber}
 				</span>
 			</h1>
-		</div>
-		{posts?.map((post) => <PostCard post={post} />)}
+		</div> -->
+		{posts?.map(post => (
+			<PostCard post={post} />
+		))}
 		<div class="flex justify-between space-x-5 mx-5 lg:mx-0">
 			{
 				hasPrevPage ? (

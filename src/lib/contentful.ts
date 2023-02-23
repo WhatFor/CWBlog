@@ -14,6 +14,19 @@ export interface BlogPost {
     moreReading?: Child<BlogPost>[];
 }
 
+export interface ContentlessPost {
+    title: string;
+    date: Date;
+    author: Author;
+    description: string;
+    slug: string;
+    ttr: number;
+    suggestedReading: boolean;
+    tags: string[];
+    coverImageUrl?: string;
+    coverImageAlt?: string;
+}
+
 export interface Author {
     name: string;
     gitHubHandle: string;

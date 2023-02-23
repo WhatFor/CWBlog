@@ -18,6 +18,7 @@ const TopLinkButton = () => {
         <AnimatePresence>
             {showButton && (
                 <motion.button
+                    aria-label="Scroll to top"
                     key="scroll-top"
                     initial={{ y: 100 }}
                     animate={{ y: 0 }}

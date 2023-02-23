@@ -7,16 +7,39 @@ import Sidebar from "./Sidebar.astro";
 
 export interface Props {
 	title: string;
+	siteDescription: string;
 }
+
+const siteDomain = process.env.SITE_URL;
+const siteTitle = "WhatFor | Blog";
+
+const siteDescription =
+	"A technical full-stack blog from a senior .NET & React developer, based in the UK.";
 
 const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en" class="bg-gray-100">
+	<!--
+		Hello, curious one!
+		This is an Astro site, fully statically generated from content
+		hosted in the Contentful headless CMS.
+		For more, see here: https://github.com/WhatFor/CWBlog
+	-->
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="robots" content="follow, index">
+		<link rel="canonical" href={siteDomain}>
+		<meta content={siteDescription} name="description">
+		<meta name="og:site_name" property="og:site_name" content="WhatFor">
+		<meta name="og:type" property="og:type" content="website">
+		<meta property="og:description" content={siteDescription}>
+		<meta property="og:title" content={siteTitle}>
+		<meta property="og:url" content={siteDomain}>
+		<meta name="twitter:title" content={siteTitle}>
+		<meta name="twitter:description" content={siteDescription}>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<title>{title}</title>
 		<script

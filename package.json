@@ -22,6 +22,7 @@
     "@contentful/rich-text-react-renderer": "^15.16.2",
     "@contentful/rich-text-types": "^16.0.2",
     "@fontsource/roboto": "^4.5.8",
+    "@headlessui/react": "^1.7.11",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "astro": "^2.0.14",

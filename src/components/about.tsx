@@ -16,7 +16,7 @@ const About = () => {
                 </div>
                 
             </div>
-            <div className="space-y-2.5 text-sm text-gray-500">
+            <div className="space-y-2.5 text-sm text-gray-600">
                 <p>Chris Walker is a senior full-stack developer who loves to dive into the latest web technologies.</p>
                 <p>Having worked with .NET Core through the entire life of the framework, he has gained a wealth of experience in B2B applications and APIs.</p>
                 <p>Combined with his ever-growing knowledge of front-end frameworks, Chris continues to look for ways to provide top-tier experiences from top to bottom of the development stack.</p>

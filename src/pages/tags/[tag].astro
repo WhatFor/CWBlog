@@ -1,9 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { contentfulClient } from "../../lib/contentful";
+import { contentfulClient, ContentlessPost } from "../../lib/contentful";
 import type { BlogPost } from "../../lib/contentful";
 import { calculateTTR } from "../../lib/ttr";
-import PostCard, { ContentlessPost } from "../../components/postCard";
+import PostCard from "../../components/postCard.astro";
 
 interface Props {
   posts: ContentlessPost[];
@@ -80,6 +80,8 @@ const { posts } = Astro.props;
         </span>
       </h1>
     </div>
-    {posts.map((post) => <PostCard post={post} />)}
+    {posts.map((post) => (
+      <PostCard post={post} />
+    ))}
   </main>
 </Layout>

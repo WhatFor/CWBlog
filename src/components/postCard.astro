@@ -1,0 +1,67 @@
+---
+import classNames from "classnames";
+import type { ContentlessPost } from "../lib/contentful";
+import PostInfo from "./postInfo";
+import Tag from "./tag";
+import { Image } from "@astrojs/image/components";
+
+interface Props {
+    post: ContentlessPost;
+}
+
+const { post } = Astro.props;
+---
+
+<div>
+    {
+        post.coverImageUrl && (
+            <div class="hidden lg:block max-h-72">
+                <a href={"/blog/" + post.slug}>
+                    <Image
+                        src={post.coverImageUrl}
+                        alt={post.coverImageAlt ?? ""}
+                        width={1000}
+                        height={288}
+                        fit="cover"
+                        format="avif"
+                        class="border shadow bg-gray-200 h-72 w-full lg:rounded-t-md"
+                    />
+                </a>
+            </div>
+        )
+    }
+    <div
+        class={classNames(
+            "w-full flex flex-col bg-white shadow border border-indigo-100",
+            "lg:border-l-indigo-200 lg:border-l-4 lg:rounded-md px-6 lg:px-8 py-5 lg:py-7",
+            post.coverImageUrl
+                ? "lg:rounded-t-none lg:rounded-b-4"
+                : "lg:rounded-md"
+        )}
+    >
+        <PostInfo
+            className="mb-3"
+            authorName={post.author.name}
+            ttr={post.ttr}
+            date={post.date.toLocaleString("default", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+            })}
+        />
+        <a
+            class="font-bold text-gray-900 text-2xl hover:underline"
+            href={`/blog/${post.slug}/`}
+        >
+            {post.title}
+        </a>
+        <p class="text-gray-600 mt-3 mb-4">
+            {post.description}
+        </p>
+        <div class="flex justify-between">
+            <div class="flex space-x-3">
+                {post.tags.map((tag) => <Tag tag={tag} />)}
+            </div>
+        </div>
+    </div>
+</div>
