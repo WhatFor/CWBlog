@@ -20,10 +20,12 @@ const { post } = Astro.props;
                     <Image
                         src={post.coverImageUrl}
                         alt={post.coverImageAlt ?? ""}
-                        width={1000}
-                        height={288}
+                        // Weird dimensions, but ultimately done to
+                        // match the maximum display size of the image on desktop.
+                        width={925}
+                        height={286}
                         fit="cover"
-                        format="avif"
+                        format="webp"
                         class="border shadow bg-gray-200 h-72 w-full lg:rounded-t-md"
                     />
                 </a>
