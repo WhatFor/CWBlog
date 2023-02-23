@@ -12,7 +12,6 @@ specifiers:
   '@contentful/rich-text-react-renderer': ^15.16.2
   '@contentful/rich-text-types': ^16.0.2
   '@fontsource/roboto': ^4.5.8
-  '@headlessui/react': ^1.7.11
   '@types/lodash': ^4.14.191
   '@types/prismjs': ^1.26.0
   '@types/react': ^18.0.21
@@ -42,7 +41,6 @@ dependencies:
   '@contentful/rich-text-react-renderer': 15.16.2_biqbaboplfbrettd7655fr4n2y
   '@contentful/rich-text-types': 16.0.2
   '@fontsource/roboto': 4.5.8
-  '@headlessui/react': 1.7.11_biqbaboplfbrettd7655fr4n2y
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
   astro: 2.0.14_sass@1.57.1
@@ -739,18 +737,6 @@ packages:
 
   /@fontsource/roboto/4.5.8:
     resolution: {integrity: sha512-CnD7zLItIzt86q4Sj3kZUiLcBk1dSk81qcqgMGaZe7SQ1P8hFNxhMl5AZthK1zrDM5m74VVhaOpuMGIL4gagaA==}
-    dev: false
-
-  /@headlessui/react/1.7.11_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-EaDbVgcyiylhtskZZf4Qb/JiiByY7cYbd0qgZ9xm2pm2X7hKojG0P4TaQYKgPOV3vojPhd/pZyQh3nmRkkcSyw==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      react: ^16 || ^17 || ^18
-      react-dom: ^16 || ^17 || ^18
-    dependencies:
-      client-only: 0.0.1
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@jridgewell/gen-mapping/0.1.1:
@@ -1473,10 +1459,6 @@ packages:
   /cli-spinners/2.7.0:
     resolution: {integrity: sha512-qu3pN8Y3qHNgE2AFweciB1IfMnmZ/fsNTEE+NOFjmGB2F/7rLhnhzppvpCnN4FovtP26k8lHyy9ptEbNwWFLzw==}
     engines: {node: '>=6'}
-    dev: false
-
-  /client-only/0.0.1:
-    resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
     dev: false
 
   /clone/1.0.4:
