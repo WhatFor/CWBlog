@@ -26,7 +26,7 @@ const { post } = Astro.props;
                         height={286}
                         fit="cover"
                         format="webp"
-                        class="border shadow bg-gray-200 h-72 w-full lg:rounded-t-md"
+                        class="shadow bg-gray-700 h-72 w-full lg:rounded-t-md"
                     />
                 </a>
             </div>
@@ -34,8 +34,8 @@ const { post } = Astro.props;
     }
     <div
         class={classNames(
-            "w-full flex flex-col bg-white shadow border border-indigo-100",
-            "lg:border-l-indigo-200 lg:border-l-4 lg:rounded-md px-6 lg:px-8 py-5 lg:py-7",
+            "w-full flex flex-col bg-gray-800 shadow border border-gray-700",
+            "lg:border-l-gray-700 lg:border-l-4 lg:rounded-md px-6 lg:px-8 py-5 lg:py-7",
             post.coverImageUrl
                 ? "lg:rounded-t-none lg:rounded-b-4"
                 : "lg:rounded-md"
@@ -52,12 +52,12 @@ const { post } = Astro.props;
             })}
         />
         <a
-            class="font-bold text-gray-900 text-2xl hover:underline"
+            class="font-bold text-gray-200 text-2xl hover:underline"
             href={`/blog/${post.slug}/`}
         >
             {post.title}
         </a>
-        <p class="text-gray-600 mt-3 mb-4">
+        <p class="text-gray-300 mt-3 mb-4">
             {post.description}
         </p>
         <div class="flex justify-between">

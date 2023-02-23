@@ -1,8 +1,7 @@
 ---
 import About from "../components/about";
-import type { ContentlessPost } from "../components/postCard";
 import RecommendedPosts from "../components/recommendedPosts";
-import { BlogPost, contentfulClient } from "../lib/contentful";
+import { BlogPost, contentfulClient, ContentlessPost } from "../lib/contentful";
 import { calculateTTR } from "../lib/ttr";
 
 const entries = await contentfulClient.getEntries<BlogPost>({
@@ -25,7 +24,7 @@ const recommendedPosts = posts.filter(x => x.suggestedReading);
 ---
 
 <div class="w-full mr-5">
-    <div class="sticky top-10 border-r-indigo-200 border-r-4 rounded-md border shadow-sm bg-white divide-y divide-solid">
+    <div class="sticky top-10 border-gray-700 border-l-4 rounded-md border shadow-sm bg-gray-800 divide-y divide-solid divide-gray-700">
         <About />
         <RecommendedPosts posts={recommendedPosts} />
     </div>

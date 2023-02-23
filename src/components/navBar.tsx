@@ -1,6 +1,5 @@
-import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import ghIcon from "../images/github-mark.svg";
+import ghIcon from "../images/github-mark-white.svg";
 
 const NavLinks = [
     { name: "Home", link: "/" },
@@ -19,32 +18,8 @@ const NavBar = () => {
 
     return (
         <>
-            <AnimatePresence>
-                {showMiniMenu && (
-
-                    <motion.div
-                        key="mini-nav"
-                        initial={{ y: -100 }}
-                        animate={{ y: 0 }}
-                        exit={{ y: -100 }}
-                        transition={{ duration: 0.3 }}
-                        className="fixed flex mx-auto justify-between inset-x-0 top-0 lg:top-4 z-0 lg:z-10 w-full lg:w-1/3 bg-white rounded-none lg:rounded-xl shadow">
-                        <nav className="w-full grid grid-cols-2 justifzy-items-stretch">
-                            {NavLinks.map(link => (
-                                <a
-                                    key={link.link}
-                                    className="text-black text-center px-5 py-3 hover:underline"
-                                    href={link.link}>
-                                    {link.name}
-                                </a>
-                            ))}
-                        </nav>
-                    </motion.div>
-
-                )}
-            </AnimatePresence>
-            <div className="flex w-full justify-between bg-white z-20 shadow-sm mb-2">
-                <a href="/" className="hidden lg:block text-gray-700 font-bold py-3 pl-5 pr-6 hover:bg-indigo-100 hover:underline">
+            <div className="flex w-full justify-between bg-gray-800 border-b border-gray-700 z-20 mb-2">
+                <a href="/" className="hidden lg:block text-gray-200 py-3 pl-5 pr-6 hover:underline">
                     WhatFor
                 </a>
                 <div className="block lg:hidden">{/* Spacer for mobile */}</div>
@@ -53,7 +28,7 @@ const NavBar = () => {
                     {NavLinks.map(link => (
                         <a
                             key={link.link}
-                            className="text-black text-center px-5 py-3 hover:underline hover:bg-indigo-100"
+                            className="text-gray-200 text-center px-5 py-3 hover:underline"
                             href={link.link}>
                             {link.name}
                         </a>

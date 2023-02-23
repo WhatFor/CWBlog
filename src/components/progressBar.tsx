@@ -25,11 +25,11 @@ const ProgressBar = () => {
                     animate={{ y: 0 }}
                     exit={{ y: -100 }}
                     transition={{ duration: 0.3 }}
-                    className="bg-slate-200 h-2 fixed top-0 left-0 right-0 d-fixed lg:hidden">
+                    className="bg-slate-700 h-2 fixed top-0 left-0 right-0 d-fixed lg:hidden">
 
                 </motion.div>
                 <motion.div
-                        className="bg-indigo-400 h-2 fixed top-0 left-0 right-0 transform-origin-0"
+                        className="bg-indigo-500 h-2 fixed top-0 left-0 right-0 transform-origin-0"
                         style={{ scaleX }}
                     />
             </>

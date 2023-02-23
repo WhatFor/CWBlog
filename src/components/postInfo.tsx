@@ -9,20 +9,20 @@ interface Props {
 
 const PostInfo = ({ ttr, date, authorName, className }: Props) => {
     return (
-        <div className={classNames("flex space-x-2", className )}>
-            <p className="text-gray-600 text-sm">
+        <div className={classNames("flex space-x-2 text-gray-300 text-sm", className )}>
+            <p>
                 {authorName}
             </p>
-            <span className="text-gray-600 text-sm">
+            <span>
                 &#x2022;
             </span>
-            <time className="text-gray-600 text-sm">
+            <time>
                 {date}
             </time>
-            <span className="text-gray-600 text-sm">
+            <span>
                 &#x2022;
             </span>
-            <p className="text-gray-600 whitespace-nowrap text-sm">
+            <p className="whitespace-nowrap">
                 {ttr} minute read
             </p>
         </div>

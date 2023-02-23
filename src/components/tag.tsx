@@ -10,8 +10,8 @@ const Tag = ({ tag }: Props) => {
             key={tag}
             href={"/tags/" + tag}
             className={classNames(
-                "rounded-full whitespace-nowrap font-mono border shadow border-indigo-100 shadow-indigo-100 font-medium bg-indigo-50 text-gray-700",
-                "hover:bg-indigo-100 hover:underline text-sm px-2 py-0.5")}>
+                "rounded-full whitespace-nowrap font-mono border border-gray-600 font-medium bg-gray-700 text-gray-200",
+                "hover:bg-gray-800 text-sm px-2 py-0.5")}>
             {tag}
         </a>
     )
