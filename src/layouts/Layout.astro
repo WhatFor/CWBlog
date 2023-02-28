@@ -6,69 +6,71 @@ import "@fontsource/roboto";
 import Sidebar from "./Sidebar.astro";
 
 export interface Props {
-	title: string;
+  title: string;
 }
 
 const siteDomain = process.env.SITE_URL;
 const siteTitle = "WhatFor | Blog";
-const siteDescription = "A technical full-stack blog from a senior .NET & React developer, based in the UK.";
+const siteDescription =
+  "A technical full-stack blog from a senior .NET & React developer, based in the UK.";
 
 const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en" class="bg-gray-900">
-	<!--
+  <!--
 		Hello, curious one!
 		This is an Astro site, fully statically generated from content
 		hosted in the Contentful headless CMS.
 		For more, see here: https://github.com/WhatFor/CWBlog
 	-->
-	<head>
-		<meta charset="UTF-8" />
-		
-		<meta name="viewport" content="width=device-width" />
-		<meta name="robots" content="follow, index">
-		<link rel="canonical" href={siteDomain}>
-		<meta content={siteDescription} name="description">
-		<meta name="og:site_name" property="og:site_name" content="WhatFor">
-		<meta name="og:type" property="og:type" content="website">
-		<meta property="og:description" content={siteDescription}>
-		<meta property="og:title" content={siteTitle}>
-		<meta property="og:url" content={siteDomain}>
-		<meta name="twitter:title" content={siteTitle}>
-		<meta name="twitter:description" content={siteDescription}>
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<link rel="manifest" href="/site.webmanifest">
-		<title>{title}</title>
-		<script
-			async
-			src="https://www.googletagmanager.com/gtag/js?id=G-W9FVWB9H52"
-		></script>
-		<script type="text/partytown">
-			window.dataLayer = window.dataLayer || [];
-			function gtag() {
-				dataLayer.push(arguments);
-			}
-			gtag("js", new Date());
-			gtag("config", "G-W9FVWB9H52");
-		</script>
-	</head>
-	<body>
-		<TopLinkButton client:load />
-		<NavBar client:load />
-		<div class="w-full h-96 -z-10 absolute top-0 bg-texture"></div>
-		<div class="w-full h-96 -z-10 absolute top-0 bg-gradient-to-t from-gray-900"></div>
-		<div class="flex space-x-8 max-w-7xl mx-auto mt-4 lg:mt-12">
-			<div class="w-full ml-0 lg:ml-3 lg:w-9/12">
-				<slot />
-			</div>
-			<div class="hidden lg:flex w-3/12">
-				<Sidebar />
-			</div>
-		</div>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="follow, index" />
+    <link rel="canonical" href={siteDomain} />
+    <meta content={siteDescription} name="description" />
+    <meta name="og:site_name" property="og:site_name" content="WhatFor" />
+    <meta name="og:type" property="og:type" content="website" />
+    <meta property="og:description" content={siteDescription} />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:url" content={siteDomain} />
+    <meta name="twitter:title" content={siteTitle} />
+    <meta name="twitter:description" content={siteDescription} />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>{title}</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9FVWB9H52"
+    ></script>
+    <script type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-W9FVWB9H52");
+    </script>
+  </head>
+  <body>
+    <TopLinkButton client:load />
+    <NavBar client:load />
+    <div class="bg-texture absolute top-0 -z-10 h-96 w-full"></div>
+    <div
+      class="absolute top-0 -z-10 h-96 w-full bg-gradient-to-t from-gray-900"
+    >
+    </div>
+    <div class="mx-auto mt-4 flex max-w-7xl space-x-8 lg:mt-12">
+      <div class="ml-0 w-full lg:ml-3 lg:w-9/12">
+        <slot />
+      </div>
+      <div class="hidden w-3/12 lg:flex">
+        <Sidebar />
+      </div>
+    </div>
+  </body>
 </html>
 <style is:global></style>

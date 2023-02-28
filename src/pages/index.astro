@@ -7,48 +7,57 @@ import PaginationConsts from "../consts/paginationConsts";
 import PostCard from "../components/postCard.astro";
 
 interface Props {
-	posts: ContentlessPost[];
+  posts: ContentlessPost[];
 }
 
 const entries = await contentfulClient.getEntries<BlogPost>({
-	content_type: "blogPost",
-	order: "-fields.date",
-	limit: PaginationConsts.itemsPerPage,
+  content_type: "blogPost",
+  order: "-fields.date",
+  limit: PaginationConsts.itemsPerPage,
 });
 
 const totalItemCount = entries.total;
 
 const posts = entries.items.map((item) => {
-	const { title, date, description, slug, author, suggestedReading, coverImage, coverImageAlt } = item.fields;
-	return {
-		title,
-		slug,
-		description,
-		date: new Date(date),
-		author: author.fields,
-		tags: item.metadata.tags.map(x => x.sys.id),
-		ttr: calculateTTR(item.fields.content),
-		suggestedReading: suggestedReading,
-		coverImageUrl: coverImage?.fields?.file?.url,
-		coverImageAlt: coverImageAlt,
-	};
+  const {
+    title,
+    date,
+    description,
+    slug,
+    author,
+    suggestedReading,
+    coverImage,
+    coverImageAlt,
+  } = item.fields;
+  return {
+    title,
+    slug,
+    description,
+    date: new Date(date),
+    author: author.fields,
+    tags: item.metadata.tags.map((x) => x.sys.id),
+    ttr: calculateTTR(item.fields.content),
+    suggestedReading: suggestedReading,
+    coverImageUrl: coverImage?.fields?.file?.url,
+    coverImageAlt: coverImageAlt,
+  };
 });
 ---
 
 <Layout title="WhatFor | Technical Blog">
-	<main class="space-y-5 mx-auto max-w-5xl mb-10">
-		{posts.map(post => (
-			<PostCard post={post} />
-		))}
-		{totalItemCount > PaginationConsts.itemsPerPage && (
-			<div class="flex justify-center mx-5">
-				<a
-					class="w-full lg:w-36 text-center text-sm text-white bg-violet-600 rounded px-4 py-2 hover:bg-violet-700 hover:text-gray-50"
-					href="/page/1"
-				>
-					See all posts
-				</a>
-			</div>
-		)}
-	</main>
+  <main class="mx-auto mb-10 max-w-5xl space-y-5">
+    {posts.map((post) => <PostCard post={post} />)}
+    {
+      totalItemCount > PaginationConsts.itemsPerPage && (
+        <div class="mx-5 flex justify-center">
+          <a
+            class="w-full rounded bg-violet-600 px-4 py-2 text-center text-sm text-white hover:bg-violet-700 hover:text-gray-50 lg:w-36"
+            href="/page/1"
+          >
+            See all posts
+          </a>
+        </div>
+      )
+    }
+  </main>
 </Layout>

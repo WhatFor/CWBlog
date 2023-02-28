@@ -5,15 +5,13 @@ import type { Document } from "@contentful/rich-text-types";
 const avgWPM = 240;
 
 const calculateTTR = (content?: Document) => {
-    if (!content) return 0;
+  if (!content) return 0;
 
-    const text = documentToPlainTextString(content);
-    const wordCount = words(text).length;
-    let ttr = Math.round(wordCount / avgWPM);
-    
-    return ttr > 0
-        ? ttr 
-        : 1;
-}
+  const text = documentToPlainTextString(content);
+  const wordCount = words(text).length;
+  let ttr = Math.round(wordCount / avgWPM);
+
+  return ttr > 0 ? ttr : 1;
+};
 
 export { calculateTTR };

@@ -1,70 +1,73 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { BlogPost, contentfulClient, ContentlessPost } from "../../lib/contentful";
+import {
+  BlogPost,
+  contentfulClient,
+  ContentlessPost,
+} from "../../lib/contentful";
 import { calculateTTR } from "../../lib/ttr";
 import PaginationConsts from "../../consts/paginationConsts";
 import PostCard from "../../components/postCard.astro";
 
 interface Props {
-	posts: ContentlessPost[];
-	hasPrevPage: boolean;
-	hasNextPage: boolean;
+  posts: ContentlessPost[];
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
 }
 
 export async function getStaticPaths() {
-	// Fetch a single item to allow for inspection of `total`.
-	const entries = await contentfulClient.getEntries<BlogPost>({
-		content_type: "blogPost",
-		order: "-fields.date",
-		limit: 1,
-		skip: 0,
-	});
+  // Fetch a single item to allow for inspection of `total`.
+  const entries = await contentfulClient.getEntries<BlogPost>({
+    content_type: "blogPost",
+    order: "-fields.date",
+    limit: 1,
+    skip: 0,
+  });
 
-	const totalItemCount = entries.total;
-	const totalPageCount = Math.ceil(
-		totalItemCount / PaginationConsts.itemsPerPage
-	);
+  const totalItemCount = entries.total;
+  const totalPageCount = Math.ceil(
+    totalItemCount / PaginationConsts.itemsPerPage
+  );
 
-	const postsGroupedByPage = await Promise.all(
-		[...Array(totalPageCount).keys()]
-			.map((x) => x + 1) // Add 2 to account for 0 index, whereas page number starts at 1.
-			.map(async (pageNumber) => {
-				const entries = await contentfulClient.getEntries<BlogPost>({
-					content_type: "blogPost",
-					order: "-fields.date",
-					limit: PaginationConsts.itemsPerPage,
-					skip:
-						((pageNumber as any as number) - 1) *
-						PaginationConsts.itemsPerPage,
-				});
+  const postsGroupedByPage = await Promise.all(
+    [...Array(totalPageCount).keys()]
+      .map((x) => x + 1) // Add 2 to account for 0 index, whereas page number starts at 1.
+      .map(async (pageNumber) => {
+        const entries = await contentfulClient.getEntries<BlogPost>({
+          content_type: "blogPost",
+          order: "-fields.date",
+          limit: PaginationConsts.itemsPerPage,
+          skip:
+            ((pageNumber as any as number) - 1) * PaginationConsts.itemsPerPage,
+        });
 
-				const posts = entries.items.map((item) => ({
-					title: item.fields.title,
-					slug: item.fields.slug,
-					description: item.fields.description,
-					author: item.fields.author.fields,
-					content: item.fields.content,
-					date: new Date(item.fields.date).toLocaleDateString(),
-					moreReading: item.fields.moreReading?.map((x) => x.fields),
-					ttr: calculateTTR(item.fields.content),
-					tags: item.metadata.tags.map((x) => x.sys.id),
-					suggestedReading: item.fields.suggestedReading,
-					coverImageUrl: item.fields.coverImage?.fields?.file?.url,
-					coverImageAlt: item.fields.coverImageAlt,
-				}));
+        const posts = entries.items.map((item) => ({
+          title: item.fields.title,
+          slug: item.fields.slug,
+          description: item.fields.description,
+          author: item.fields.author.fields,
+          content: item.fields.content,
+          date: new Date(item.fields.date).toLocaleDateString(),
+          moreReading: item.fields.moreReading?.map((x) => x.fields),
+          ttr: calculateTTR(item.fields.content),
+          tags: item.metadata.tags.map((x) => x.sys.id),
+          suggestedReading: item.fields.suggestedReading,
+          coverImageUrl: item.fields.coverImage?.fields?.file?.url,
+          coverImageAlt: item.fields.coverImageAlt,
+        }));
 
-				return {
-					params: { pageNumber: pageNumber },
-					props: {
-						posts: posts,
-						hasNextPage: pageNumber < totalPageCount,
-						hasPrevPage: pageNumber > 1,
-					},
-				};
-			})
-	);
+        return {
+          params: { pageNumber: pageNumber },
+          props: {
+            posts: posts,
+            hasNextPage: pageNumber < totalPageCount,
+            hasPrevPage: pageNumber > 1,
+          },
+        };
+      })
+  );
 
-	return postsGroupedByPage;
+  return postsGroupedByPage;
 }
 
 const { pageNumber } = Astro.params;
@@ -72,62 +75,37 @@ const { posts, hasNextPage, hasPrevPage } = Astro.props;
 ---
 
 <Layout title="WhatFor | Technical Blog">
-	<main class="space-y-5 mx-auto max-w-5xl">
-		<!-- <div
-			class="flex space-y-4 flex-col lg:border-l-indigo-200 lg:border-l-4 lg:rounded-md border shadow-sm bg-white px-5 py-4"
-		>
-			<h1 class="text-gray-700 text-xl w-full flex space-x-2">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="#b5cff9"
-					class="w-5 h-5 mt-1"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
-					></path>
-				</svg>
-				<span>
-					Page {pageNumber}
-				</span>
-			</h1>
-		</div> -->
-		{posts?.map(post => (
-			<PostCard post={post} />
-		))}
-		<div class="flex justify-between space-x-5 mx-5 lg:mx-0">
-			{
-				hasPrevPage ? (
-					<div class="flex justify-center flex-1 lg:flex-initial">
-						<a
-							class="w-full text-center text-sm text-white bg-violet-600 rounded px-4 py-2 hover:bg-violet-700 hover:text-gray-50"
-							href={"/page/" + (parseInt(pageNumber!, 10) - 1)}
-						>
-							Previous
-						</a>
-					</div>
-				) : (
-					<>&nbsp;</>
-				)
-			}
-			{
-				hasNextPage ? (
-					<div class="flex justify-center flex-1 lg:flex-initial">
-						<a
-							class="w-full text-center text-sm text-white bg-violet-600 rounded px-4 py-2 hover:bg-violet-700 hover:text-gray-50"
-							href={"/page/" + (parseInt(pageNumber!, 10) + 1)}
-						>
-							Next
-						</a>
-					</div>
-				) : (
-					<>&nbsp;</>
-				)
-			}
-		</div>
-	</main>
+  <main class="mx-auto max-w-5xl space-y-5">
+    {posts?.map((post) => <PostCard post={post} />)}
+    <div class="mx-5 flex justify-between space-x-5 lg:mx-0">
+      {
+        hasPrevPage ? (
+          <div class="flex flex-1 justify-center lg:flex-initial">
+            <a
+              class="w-full rounded bg-violet-600 px-4 py-2 text-center text-sm text-white hover:bg-violet-700 hover:text-gray-50"
+              href={"/page/" + (parseInt(pageNumber!, 10) - 1)}
+            >
+              Previous
+            </a>
+          </div>
+        ) : (
+          <>&nbsp;</>
+        )
+      }
+      {
+        hasNextPage ? (
+          <div class="flex flex-1 justify-center lg:flex-initial">
+            <a
+              class="w-full rounded bg-violet-600 px-4 py-2 text-center text-sm text-white hover:bg-violet-700 hover:text-gray-50"
+              href={"/page/" + (parseInt(pageNumber!, 10) + 1)}
+            >
+              Next
+            </a>
+          </div>
+        ) : (
+          <>&nbsp;</>
+        )
+      }
+    </div>
+  </main>
 </Layout>

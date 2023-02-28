@@ -5,27 +5,29 @@ import { BlogPost, contentfulClient, ContentlessPost } from "../lib/contentful";
 import { calculateTTR } from "../lib/ttr";
 
 const entries = await contentfulClient.getEntries<BlogPost>({
-	content_type: "blogPost",
+  content_type: "blogPost",
 });
 
 const posts = entries.items.map((item) => {
-	const { title, date, description, slug, suggestedReading } = item.fields;
-	return {
-		title,
-		slug,
-		description,
-		date: new Date(date),
-		ttr: calculateTTR(item.fields.content),
-		suggestedReading: suggestedReading,
-	} as ContentlessPost;
+  const { title, date, description, slug, suggestedReading } = item.fields;
+  return {
+    title,
+    slug,
+    description,
+    date: new Date(date),
+    ttr: calculateTTR(item.fields.content),
+    suggestedReading: suggestedReading,
+  } as ContentlessPost;
 });
 
-const recommendedPosts = posts.filter(x => x.suggestedReading);
+const recommendedPosts = posts.filter((x) => x.suggestedReading);
 ---
 
-<div class="w-full mr-5">
-    <div class="sticky top-10 border-gray-700 border-l-4 rounded-md border shadow-sm bg-gray-800 divide-y divide-solid divide-gray-700">
-        <About />
-        <RecommendedPosts posts={recommendedPosts} />
-    </div>
+<div class="mr-5 w-full">
+  <div
+    class="sticky top-10 divide-y divide-solid divide-gray-700 rounded-md border border-l-4 border-gray-700 bg-gray-800 shadow-sm"
+  >
+    <About />
+    <RecommendedPosts posts={recommendedPosts} />
+  </div>
 </div>

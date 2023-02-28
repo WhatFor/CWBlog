@@ -50,18 +50,18 @@ const { posts } = Astro.props;
 ---
 
 <Layout title={tag + "WhatFor"}>
-  <main class="mx-auto max-w-5xl space-y-5 mb-10">
+  <main class="mx-auto mb-10 max-w-5xl space-y-5">
     <div
-      class="flex space-y-4 flex-col border-gray-700 lg:border-l-4 lg:rounded-md border shadow-sm bg-gray-800 px-5 py-4"
+      class="flex flex-col space-y-4 border border-gray-700 bg-gray-800 px-5 py-4 shadow-sm lg:rounded-md lg:border-l-4"
     >
-      <h1 class="text-gray-200 text-xl w-full flex space-x-2">
+      <h1 class="flex w-full space-x-2 text-xl text-gray-200">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="#ababab"
-          class="w-5 h-5 mt-1"
+          class="mt-1 h-5 w-5"
         >
           <path
             stroke-linecap="round"
@@ -80,8 +80,6 @@ const { posts } = Astro.props;
         </span>
       </h1>
     </div>
-    {posts.map((post) => (
-      <PostCard post={post} />
-    ))}
+    {posts.map((post) => <PostCard post={post} />)}
   </main>
 </Layout>
