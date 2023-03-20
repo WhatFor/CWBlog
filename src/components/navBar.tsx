@@ -5,7 +5,7 @@ import NavLink from "./navLink";
 const NavLinks = [
   { name: "Home", link: "/" },
   { name: "Tags", link: "/tags" },
-  //{ name: "About", link: "/about" },
+  { name: "About", link: "/about" },
 ];
 
 const NavBar = () => {
@@ -42,16 +42,15 @@ const NavBar = () => {
               <div className="flex w-full justify-between">
                 <div className="flex items-center lg:space-x-12">
                   <NavLink
-                    className="bg-gradient-to-r from-blue-600 to-fuchsia-400"
-                    classNameWrapper="border-gray-700 hover:border-gray-500"
+                    className="bg-gradient-to-r from-blue-600 to-fuchsia-400 text-lg uppercase"
                     text="WhatFor"
                     href="/"
                   />
-                  <nav className="flex items-center space-x-8">
+                  <nav className="flex items-center space-x-4">
                     {NavLinks.map((link) => (
                       <NavLink
-                        className="bg-gradient-to-r from-blue-400 to-green-400"
-                        classNameWrapper="border-gray-700 hover:border-gray-500"
+                        className="upp bg-gradient-to-r from-blue-400 to-green-400"
+                        classNameWrapper="border rounded-full border-gray-700 hover:border-gray-600"
                         key={link.link}
                         text={link.name}
                         href={link.link}
@@ -62,7 +61,7 @@ const NavBar = () => {
                 <div className="flex items-center pl-8">
                   <a
                     className="flex items-center justify-center rounded-full border border-gray-700
-                     bg-off-black p-2.5 transition duration-500 hover:border-gray-500"
+                     bg-off-black p-2.5 transition duration-500 hover:border-gray-600"
                     href="https://github.com/WhatFor"
                   >
                     <img

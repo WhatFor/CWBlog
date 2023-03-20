@@ -131,8 +131,8 @@ code {
   height: 100%;
   position: relative;
   background: repeating-linear-gradient(
-    rgb(10, 10, 10),
-    rgb(10, 10, 10) 10px,
+    rgb(17, 17, 17),
+    rgb(17, 17, 17) 10px,
     transparent 10px,
     transparent 12px
   );
@@ -144,9 +144,77 @@ code {
   position: relative;
   background: repeating-linear-gradient(
     90deg,
-    rgb(10, 10, 10),
-    rgb(10, 10, 10) 10px,
+    rgb(17, 17, 17),
+    rgb(17, 17, 17) 10px,
     transparent 10px,
     transparent 12px
   );
+}
+
+// RAINBOW HOVER
+
+.rainbow-hover {
+  position: relative;
+
+  & > span {
+    z-index: 2;
+    position: relative;
+    transition: color 350ms ease 150ms;
+  }
+  & > img {
+    z-index: 2;
+    position: relative;
+    transition: filter 350ms ease 150ms;
+  }
+}
+
+.rainbow-hover-rounded:before {
+  border-radius: 9999px;
+}
+
+.rainbow-hover:hover {
+  & > span {
+    color: black !important;
+    transition: color 350ms ease 20ms;
+  }
+  & > img {
+    filter: invert(1);
+    transition: filter 350ms ease 20ms;
+  }
+}
+
+.rainbow-hover-quick {
+  transition: color 350ms ease;
+  & > span {
+    transition: color 350ms ease 100ms;
+  }
+  & > img {
+    transition: filter 350ms ease 100ms;
+  }
+}
+
+.rainbow-hover:before {
+  content: "";
+  height: 100%;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+
+  background: linear-gradient(
+    -45deg,
+    transparent 0% 50%,
+    transparent 50% 50%,
+    rgb(82, 255, 113) 50%,
+    rgb(77, 255, 172) 75%,
+    rgb(77, 255, 243) 100%
+  );
+  background-size: 200% 200%;
+  background-position: 100% 100%;
+  transition: background-position 350ms ease-in-out 0ms;
+  z-index: 1;
+}
+
+.rainbow-hover:hover:before {
+  background-position: 0% 0%;
 }

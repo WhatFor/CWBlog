@@ -22,7 +22,7 @@ const NavLink = ({
   return (
     <div
       className={classNames(
-        "rounded-full border bg-off-black",
+        "bg-off-black",
         "transition duration-500",
         classNameWrapper
       )}
@@ -31,7 +31,7 @@ const NavLink = ({
         href={href}
         className={classNames(
           "text-fill-transparent bg-size-200 bg-pos-anim block py-2 px-5",
-          "text-center font-bold uppercase transition-all duration-500",
+          "text-center font-bold transition-all duration-500",
           className
         )}
       >
