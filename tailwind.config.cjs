@@ -10,6 +10,7 @@ module.exports = {
       },
       colors: {
         "off-black": "#111",
+        "gray-flat": "#444",
       },
     },
   },

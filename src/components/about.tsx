@@ -33,7 +33,9 @@ const About = () => {
       </div>
       <a
         href="https://github.com/WhatFor"
-        className="group flex items-center rounded bg-indigo-600 px-2 py-3 shadow hover:bg-indigo-700"
+        className="
+          group flex items-center rounded bg-indigo-600 px-2 py-3
+          shadow hover:bg-indigo-700"
       >
         <img
           alt="GitHub Logo"

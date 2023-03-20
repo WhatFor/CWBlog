@@ -30,16 +30,14 @@ code {
 .bg-texture {
   background: linear-gradient(
     to right,
-    rgba(82, 255, 113, 0.1),
-    rgba(77, 255, 172, 0.5),
-    rgba(77, 255, 243, 0.7),
-    rgba(82, 255, 113, 0.1)
+    rgba(82, 255, 113, 0.2),
+    rgba(77, 255, 243, 0.45),
+    rgba(82, 255, 113, 0.2)
   );
   -webkit-mask-image: var(--bg-texture-svg);
   mask-image: var(--bg-texture-svg);
 
-  background-size: 200%;
-  animation: background-pan 4s linear infinite;
+  background-size: 100%;
 }
 
 .text-fill-transparent {
@@ -50,6 +48,12 @@ code {
 
 .bg-size-150 {
   background-size: 150%;
+}
+.bg-size-200 {
+  background-size: 200%;
+}
+.bg-size-250 {
+  background-size: 250%;
 }
 
 .bg-pos-anim {
@@ -87,16 +91,18 @@ code {
 
 // Variables for navbar effect
 :root {
-  --base-dot-colour: #333;
-  --blur: 50px;
-  --size: 500px;
-  --spin-time: 5s;
+  --base-dot-colour: #444;
+  --blur: 200px;
+  --size: 600px;
+  --spin-time: 10s;
 }
 
 #navbar-wrapper {
   background-color: var(--base-dot-colour);
   overflow: hidden;
   position: relative;
+  padding-bottom: 1px;
+  height: 94px;
 }
 
 #navbar-mouse-trailer {
@@ -104,12 +110,12 @@ code {
   aspect-ratio: 1/1;
   border-radius: 50%;
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: -50%;
+  top: -50%;
   translate: -50% -50%;
   z-index: 1;
 
-  background: linear-gradient(to right, rgb(255, 70, 243), rgb(82, 255, 113));
+  background: linear-gradient(to right, rgb(77, 255, 243), rgb(82, 255, 113));
   animation: rotate-full var(--spin-time) infinite;
   filter: blur(var(--blur));
 }
@@ -117,10 +123,12 @@ code {
 #navbar {
   z-index: 3;
   position: relative;
+  height: 100%;
 }
 
 #navbar-horiz-bars {
   z-index: 2;
+  height: 100%;
   position: relative;
   background: repeating-linear-gradient(
     rgb(10, 10, 10),
@@ -132,6 +140,7 @@ code {
 
 #navbar-verti-bars {
   z-index: 2;
+  height: 100%;
   position: relative;
   background: repeating-linear-gradient(
     90deg,

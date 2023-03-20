@@ -82,7 +82,7 @@ const { posts, hasNextPage, hasPrevPage } = Astro.props;
         hasPrevPage ? (
           <div class="flex flex-1 justify-center lg:flex-initial">
             <a
-              class="w-full rounded bg-violet-600 px-4 py-2 text-center text-sm text-white hover:bg-violet-700 hover:text-gray-50"
+              class="w-full bg-violet-600 px-4 py-2 text-center text-sm text-white hover:bg-violet-700 hover:text-gray-50"
               href={"/page/" + (parseInt(pageNumber!, 10) - 1)}
             >
               Previous
@@ -96,7 +96,7 @@ const { posts, hasNextPage, hasPrevPage } = Astro.props;
         hasNextPage ? (
           <div class="flex flex-1 justify-center lg:flex-initial">
             <a
-              class="w-full rounded bg-violet-600 px-4 py-2 text-center text-sm text-white hover:bg-violet-700 hover:text-gray-50"
+              class="w-full bg-violet-600 px-4 py-2 text-center text-sm text-white hover:bg-violet-700 hover:text-gray-50"
               href={"/page/" + (parseInt(pageNumber!, 10) + 1)}
             >
               Next

@@ -28,7 +28,7 @@ const { post } = Astro.props;
             height={286}
             fit="cover"
             format="webp"
-            class="h-72 w-full bg-gray-700 shadow lg:rounded-t-md"
+            class="h-72 w-full bg-gray-700"
           />
         </a>
       </div>
@@ -36,9 +36,8 @@ const { post } = Astro.props;
   }
   <div
     class={classNames(
-      "w-full flex flex-col bg-gray-800 shadow border border-gray-700",
-      "lg:border-l-gray-700 lg:border-l-4 lg:rounded-md px-6 lg:px-8 py-5 lg:py-7",
-      post.coverImageUrl ? "lg:rounded-t-none lg:rounded-b-4" : "lg:rounded-md"
+      "w-full flex flex-col bg-off-black shadow border border-gray-flat",
+      " px-6 lg:px-8 py-5 lg:py-7"
     )}
   >
     <PostInfo
