@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 const ProgressBar = () => {
   const { scrollYProgress } = useScroll();
+
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
@@ -29,7 +30,8 @@ const ProgressBar = () => {
           className="d-fixed fixed top-0 left-0 right-0 h-2 bg-slate-700 lg:hidden"
         ></motion.div>
         <motion.div
-          className="transform-origin-0 fixed top-0 left-0 right-0 h-2 bg-indigo-500"
+          id="progress-bar"
+          className="transform-origin-0 fixed top-0 left-0 right-0 z-50 h-2"
           style={{ scaleX }}
         />
       </>
