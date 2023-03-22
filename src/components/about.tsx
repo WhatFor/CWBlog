@@ -35,7 +35,7 @@ const About = () => {
         href="https://github.com/WhatFor"
         className="
           rainbow-hover
-          group flex items-center border border-gray-800 bg-off-black
+          group flex items-center border border-gray-flat bg-off-black
           px-4 py-3"
       >
         <img
