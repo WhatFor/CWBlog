@@ -25,7 +25,7 @@ const RecommendedPosts = ({ posts }: Props) => {
       <div className="flex flex-col space-y-5">
         {posts.map((post, index) => (
           <a key={post.slug} href={"/blog/" + post.slug}>
-            <div className="py-05 group space-y-1 border-l-4 border-l-gray-flat px-3 text-sm text-gray-200 hover:border-l-indigo-500">
+            <div className="py-05 group space-y-1 border-l-4 border-l-gray-flat px-3 text-sm text-gray-200 hover:border-l-green-400">
               <p className="group-hover:underline">{post.title}</p>
               <p className="text-xs text-gray-300">
                 {post.date.toLocaleString("default", {

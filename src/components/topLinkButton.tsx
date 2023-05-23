@@ -24,13 +24,13 @@ const TopLinkButton = () => {
           animate={{ y: 0 }}
           exit={{ y: 100 }}
           transition={{ duration: 0.3 }}
-          className="fixed bottom-4 right-4 border border-indigo-500 bg-off-black p-3 hover:bg-gray-flat"
+          className="fixed bottom-4 right-4 border border-green-400 bg-off-black p-3 hover:bg-gray-flat"
           onClick={scrollTop}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            fill="#6366f1"
+            fill="rgb(74, 222, 128)"
             className="h-7 w-7"
           >
             <path

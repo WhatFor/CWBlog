@@ -11,6 +11,7 @@ import "prismjs/components/prism-jsx.min";
 import "prismjs/components/prism-typescript.min";
 import "prismjs/components/prism-tsx.min";
 import "prismjs/components/prism-csharp.min";
+import "prismjs/components/prism-bash.min";
 
 // Manually load line-numbers plugin
 import "prismjs/plugins/line-numbers/prism-line-numbers.min";
@@ -53,7 +54,7 @@ const BlogContent = ({ body }: Props) => {
   }, []);
 
   return (
-    <article className="px-3 py-3 lg:px-8 lg:py-5" id="blog-post-content">
+    <article className="px-1 py-0 lg:px-8 lg:py-5" id="blog-post-content">
       {documentToReactComponents(body, options)}
     </article>
   );
